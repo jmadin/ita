@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="col-md-8 col-md-offset-2">
+  <div class="col-md-10 col-md-offset-1">
 
 		<h1><%= @map.map_name %></h1>
 
@@ -34,43 +34,44 @@
 		</p>
 
 		<div class="btn-group">
-			<%= link_to 'Edit', edit_map_path(@map), class: "btn btn-default" %>
+	    <% if signed_in? && current_user.admin? %>
+				<%= link_to 'Edit', edit_map_path(@map), class: "btn btn-default" %>
+			<% end %>
 			<%= link_to 'Back', maps_path, class: "btn btn-default" %>
 		</div>
 	
-		<%= link_to 'Delete', map_path(@map), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-md btn-danger pull-right"  %>
+    <% if signed_in? && current_user.admin? %>
+			<%= link_to 'X', map_path(@map), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-md btn-danger pull-right"  %>
+		<% end %>
 		
 		<%= image_tag "record_thumb/#{@map.map_code}.png", :style => "border:0px;", class:  "img-responsive" %>
 
-		<h3>Outlines</h3>
+		<h2>Outlines</h2>
 
-			<table class="table">
-				<tr>
-					<th>ID</th>
-					<th>Type</th>
-					<th>State</th>
-					<th>Filename</th>
-					<th>Outliner</th>
-					<th>Notes</th>
-					<th></th>
-				</tr>
+		<div class="row">
+		  <div class="col-md-1"><h4>ID</h4></div>
+		  <div class="col-md-2"><h4>Type</h4></div>
+		  <div class="col-md-2"><h4>State</h4></div>
+		  <div class="col-md-2"><h4>Filename</h4></div>
+		  <div class="col-md-2"><h4>Notes</h4></div>
+		  <div class="col-md-3"></div>
+		</div>
 
-				<%= render @map.outlines %>
+		<%= render @map.outlines %>
 
-				<tr>
-					<%= form_for([@map, @map.outlines.build]) do |f| %>
-				  <td></td>
+		<div class="row">
+			<%= form_for([@map, @map.outlines.build]) do |f| %>
+			  <div class="col-md-1"></div>
+			  <div class="col-md-2"><%= f.select :substrate_type, ["", "Hard coral", "Soft coral", "Filamentous algae", "Macroalgae", "Hard substrate", "Large rubble", "Small rubble", "Sand"], {}, { class: "form-control" } %></div>
+			  <div class="col-md-2"><%= f.select :substrate_state, ["", "Attached", "Dislodged", "Break", "Scoured", "Damage other"], {}, { class: "form-control" } %></div>
+			  <div class="col-md-2"><%= f.text_field :outline_filename, class: "form-control" %></div>
 
-				  <td><%= f.select :substrate_type, ["", "Hard coral", "Soft coral", "Filamentous algae", "Macroalgae", "Hard substrate", "Large rubble", "Small rubble", "Sand"], {}, { class: "form-control" } %>
-				  </td>
-				  <td><%= f.select :substrate_state, ["", "Attached", "Dislodged", "Break", "Scoured", "Damage other"], {}, { class: "form-control" } %></td>
-				  <td><%= f.text_field :outline_filename, class: "form-control" %></td>
-				  <td><%= collection_select :outline, :user_id, User.all, :id, :name, { :selected => current_user }, class: "form-control" %></td>
-				  <td><%= f.text_area :outline_notes, class: "form-control" %></td>
-				  <td><%= f.submit class: "btn btn-primary" %></td>
-				<% end %>
-			</tr>
-		</table>
+			  <%= f.hidden_field :user_id, :value => current_user.id %>
+
+			  <div class="col-md-2"><%= f.text_area :outline_notes, class: "form-control" %></div>
+			  <div class="col-md-3"><%= f.submit class: "btn btn-primary" %></div>
+			<% end %>
+		</div>
 
 
 

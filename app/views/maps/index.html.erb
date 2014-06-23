@@ -16,8 +16,6 @@
   </div>
 </div>
 
-<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
-
 <script type="text/javascript">
   var locations = <%= raw @maps.map {|i| [i.map_name.to_s, i.latitude.to_s, i.longitude.to_s, i.id.to_s] } %>;
 

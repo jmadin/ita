@@ -78,3 +78,6 @@ r20140430_horseshoe_circle02b, 0.000834102
     $ bundle exec rake assets:precompile RAILS_ENV=production RAILS_GROUPS=assets
     $ rails s -e production -p 3009
 
+delete from outlines;
+delete from sqlite_sequence where name='outlines';
+

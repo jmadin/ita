@@ -1,6 +1,7 @@
 class MapsController < ApplicationController
   before_action :signed_in_user, only: [:index, :create, :show, :edit, :update, :destroy]
   before_action :set_map, only: [:show, :edit, :update, :destroy]
+  before_action :admin_user,     only: [:edit, :update, :destroy]
 
   # GET /maps
   # GET /maps.json
