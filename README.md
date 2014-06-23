@@ -70,3 +70,11 @@ r20140428_osprey, 0.00152434
 r20140429_cornerbeach_circle01, 0.00101352
 r20140430_horseshoe_circle02a, 0.00195357
 r20140430_horseshoe_circle02b, 0.000834102
+
+# Production
+
+    $ bundle exec rake db:migrate RAILS_ENV="production"
+    $ rake tmp:clear
+    $ bundle exec rake assets:precompile RAILS_ENV=production RAILS_GROUPS=assets
+    $ rails s -e production -p 3009
+
