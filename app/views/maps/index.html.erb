@@ -1,0 +1,48 @@
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <h1>Maps</h1>
+
+    <div id="map-canvas" class="map-container" style="height: 450px;"></div> 
+
+    <table class="table">
+      <% @maps.each do |map| %>
+        <tr>
+          <td><%= link_to map.map_name, map %></td>
+        </tr>
+      <% end %>
+    </table>
+
+    <%= link_to 'New Map', new_map_path, class: 'btn btn-md btn-primary' %>
+  </div>
+</div>
+
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+
+<script type="text/javascript">
+  var locations = <%= raw @maps.map {|i| [i.map_name.to_s, i.latitude.to_s, i.longitude.to_s, i.id.to_s] } %>;
+
+  var map = new google.maps.Map(document.getElementById('map-canvas'), {
+    zoom: 13,
+    center: new google.maps.LatLng(-14.675068, 145.458358),
+    mapTypeId: google.maps.MapTypeId.SATELLITE,
+    streetViewControl: false
+  });
+
+  var infowindow = new google.maps.InfoWindow();
+
+  var marker, i;
+
+  for (i = 0; i < locations.length; i++) {  
+    marker = new google.maps.Marker({
+      position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+      map: map
+    });
+
+    google.maps.event.addListener(marker, 'click', (function(marker, i) {
+      return function() {
+        infowindow.setContent('<a data-no-turbolink="true" href="maps/'+locations[i][3]+'">'+locations[i][0]+'</a>');
+        infowindow.open(map, marker);
+      }
+    })(marker, i));
+  }
+</script>

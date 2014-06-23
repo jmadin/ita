@@ -1,0 +1,43 @@
+<%= form_for(@outline) do |f| %>
+  <%= render 'shared/error_messages', object: f.object %>
+
+  <%= f.hidden_field :map, :value => @map.id %>
+
+  <div class="form-group">
+    <%= f.label :substrate_type %><br>
+    <%= f.select :substrate_type, ["", "Hard coral", "Soft coral", "Filamentous algae", "Macroalgae", "Hard substrate", "Large rubble", "Small rubble", "Sand"], {}, { class: "form-control" } %>
+  </div>
+  <div class="form-group">
+    <%= f.label :substrate_state %><br>
+    <%= f.select :substrate_state, ["", "Attached", "Dislodged", "Break", "Scoured", "Damage other"], {}, { class: "form-control" } %>
+  </div>
+  <div class="form-group">
+    <%= f.label :outline_filename %><br>
+    <%= f.text_field :outline_filename, class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <%= f.label :outliner_name %><br>
+    <%= collection_select :outline, :user_id, User.all, :id, :name, { :selected => @outline.outliner_name }, class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <%= f.label :outline_flag %><br>
+    <%= f.text_field :outline_flag, class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <%= f.label :outline_area %><br>
+    <%= f.text_field :outline_area, class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <%= f.label :outline_perimeter %><br>
+    <%= f.text_field :outline_perimeter, class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <%= f.label :outline_notes %><br>
+    <%= f.text_area :outline_notes, class: "form-control" %>
+  </div>
+
+  <%= f.submit "Submit", class: "btn btn-large btn-primary" %>
+  
+<% end %>
+
+

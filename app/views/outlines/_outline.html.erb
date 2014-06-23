@@ -1,0 +1,32 @@
+<tr>
+
+  <td>
+    <%= outline.id %>
+  </td>
+  <td>
+    <%= outline.substrate_type %>
+  </td>
+  <td>
+    <%= outline.substrate_state %>
+  </td>
+  <td>
+    <%= outline.outline_filename %>
+  </td>
+  <td>
+    <% if !outline.user_id.blank? %>
+      <%= User.find(outline.user_id).name %>
+    <% end %>
+  </td>
+  <td>
+    <%= outline.outline_notes %>
+  </td>
+  <td style="width:200px;">
+    <div class="btn-group">
+      <%= link_to 'Show', map_outline_path(outline.map, outline), class: "btn btn-default" %>
+      <%= link_to 'Edit', edit_map_outline_path(outline.map, outline), class: "btn btn-default" %>
+      <%= link_to 'Delete', map_outline_path(outline.map, outline), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-default btn-danger" %>
+    </div>
+
+  </td>
+
+</tr>

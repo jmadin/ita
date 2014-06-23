@@ -1,0 +1,55 @@
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <h1>Outline details</h1>
+
+    <p>
+      <strong>Map:</strong>
+      <%= @outline.map.map_name %>
+    </p>
+
+    <p>
+      <strong>Substrate type:</strong>
+      <%= @outline.substrate_type %>
+    </p>
+
+    <p>
+      <strong>Substrate state:</strong>
+      <%= @outline.substrate_state %>
+    </p>
+
+    <p>
+      <strong>Outline filename:</strong>
+      <%= @outline.outline_filename %>
+    </p>
+
+    <p>
+      <strong>Outliner name:</strong>
+      <%= @outline.user.name %>
+    </p>
+
+    <p>
+      <strong>Outline flag:</strong>
+      <%= @outline.outline_flag %>
+    </p>
+
+    <p>
+      <strong>Outline area:</strong>
+      <%= @outline.outline_area %>
+    </p>
+
+    <p>
+      <strong>Outline perimeter:</strong>
+      <%= @outline.outline_perimeter %>
+    </p>
+
+    <p>
+      <strong>Outline notes:</strong>
+      <%= @outline.outline_notes %>
+    </p>
+
+    <div class="btn-group">
+      <%= link_to 'Edit', edit_map_outline_path(@outline.map, @outline), class: "btn btn-default" %>
+      <%= link_to 'Back', map_path(@outline.map), class: "btn btn-default" %>
+    </div>
+  </div>
+</div>

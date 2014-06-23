@@ -1,0 +1,45 @@
+<div class="row">
+  <div class="col-md-10 col-md-offset-1">
+    <h1>Outlines</h1>
+
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Map</th>
+          <th>Substrate type</th>
+          <th>Substrate state</th>
+          <th>Outline filename</th>
+          <th>Outliner name</th>
+          <th>Outline flag</th>
+          <th>Outline area</th>
+          <th>Outline perimeter</th>
+          <th>Outline notes</th>
+          <th></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @outlines.each do |outline| %>
+          <tr>
+            <td><%= outline.map_id %></td>
+            <td><%= outline.substrate_type %></td>
+            <td><%= outline.substrate_state %></td>
+            <td><%= outline.outline_filename %></td>
+            <td><%= outline.user_id %></td>
+            <td><%= outline.outline_flag %></td>
+            <td><%= outline.outline_area %></td>
+            <td><%= outline.outline_perimeter %></td>
+            <td><%= outline.outline_notes %></td>
+            <td><%= link_to 'Show', outline %> |
+            <%= link_to 'Edit', edit_outline_path(outline) %> |
+            <%= link_to 'Destroy', outline, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+    <br>
+
+    <%= link_to 'New Outline', new_outline_path %>
+  </div>
+</div>

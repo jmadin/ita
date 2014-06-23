@@ -1,0 +1,79 @@
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+
+		<h1><%= @map.map_name %></h1>
+
+		<p>
+		  <strong>Map code:</strong>
+		  <%= @map.map_code %>
+		</p>
+
+		<p>
+		  <strong>Coordinates:</strong>
+		  <%= @map.latitude %>, <%= @map.longitude %>
+		</p>
+
+		<p>
+		  <strong>Geotiff pixel size (metres):</strong>
+		  <%= @map.pixel_size %>
+		</p>
+
+		<p>
+		  <strong>Map description:</strong>
+		  <%= @map.map_description %>
+		</p>
+
+		<p>
+		  <strong>Map date:</strong>
+		  <%= @map.map_date %>
+		</p>
+
+		<p>
+		  <strong>Download full-sized as:</strong>
+			<%= link_to "png", image_path("record_png/#{@map.map_code}.png") %> | <%= link_to "geotiff", image_path("record_geotiff/#{@map.map_code}.tif") %><br/>(Note that geotiffs retain lat and long information)
+		</p>
+
+		<div class="btn-group">
+			<%= link_to 'Edit', edit_map_path(@map), class: "btn btn-default" %>
+			<%= link_to 'Back', maps_path, class: "btn btn-default" %>
+		</div>
+	
+		<%= link_to 'Delete', map_path(@map), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-md btn-danger pull-right"  %>
+		
+		<%= image_tag "record_thumb/#{@map.map_code}.png", :style => "border:0px;", class:  "img-responsive" %>
+
+		<h3>Outlines</h3>
+
+			<table class="table">
+				<tr>
+					<th>ID</th>
+					<th>Type</th>
+					<th>State</th>
+					<th>Filename</th>
+					<th>Outliner</th>
+					<th>Notes</th>
+					<th></th>
+				</tr>
+
+				<%= render @map.outlines %>
+
+				<tr>
+					<%= form_for([@map, @map.outlines.build]) do |f| %>
+				  <td></td>
+
+				  <td><%= f.select :substrate_type, ["", "Hard coral", "Soft coral", "Filamentous algae", "Macroalgae", "Hard substrate", "Large rubble", "Small rubble", "Sand"], {}, { class: "form-control" } %>
+				  </td>
+				  <td><%= f.select :substrate_state, ["", "Attached", "Dislodged", "Break", "Scoured", "Damage other"], {}, { class: "form-control" } %></td>
+				  <td><%= f.text_field :outline_filename, class: "form-control" %></td>
+				  <td><%= collection_select :outline, :user_id, User.all, :id, :name, { :selected => current_user }, class: "form-control" %></td>
+				  <td><%= f.text_area :outline_notes, class: "form-control" %></td>
+				  <td><%= f.submit class: "btn btn-primary" %></td>
+				<% end %>
+			</tr>
+		</table>
+
+
+
+	</div>
+</div>
+
