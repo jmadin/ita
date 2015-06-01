@@ -2,9 +2,9 @@
   <div class="col-sm-4">
     <% provide(:title, @user.name) %>
 
-    <h1>
+    <h3>
       <%= @user.name %> <%= @user.surname %>
-    </h1>
+    </h3>
 
     <p>
       <%= @user.institution %>
@@ -14,22 +14,32 @@
       <%= mail_to @user.email %>
     </p>
 
+    <% if current_user.admin? or current_user?(@user) %>
+      <p>
+        <%= link_to "Edit", edit_user_path(current_user), class: "btn btn-sm btn-default" %>
+      </p>
+    <% end %>
+
     <h3>Trips</h3>
 
-    <ul class="list-group">
-      <% @user.trips.each do |trip| %>
-        <li class="list-group-item">             
-          <div class="row">
-            <div class="col-sm-6">
-              <%= link_to trip.trip_name, trip %>
+    <% if @user.trips.present? %>
+      <ul class="list-group">
+        <% @user.trips.each do |trip| %>
+          <li class="list-group-item">             
+            <div class="row">
+              <div class="col-sm-6">
+                <%= link_to trip.trip_name, trip %>
+              </div>
+              <div class="col-sm-6">
+                <%= trip.start_date.to_s(:ita_date) %> to <%= trip.end_date.to_s(:ita_date) %>
+              </div>
             </div>
-            <div class="col-sm-6">
-              <%= trip.start_date.to_s(:ita_date) %> to <%= trip.end_date.to_s(:ita_date) %>
-            </div>
-          </div>
-        </li>
-      <% end %>
-    </ul>
+          </li>
+        <% end %>
+      </ul>
+    <% else %>
+      <p>No trips.</p>
+    <% end %>
 
   </div>
 </div>
