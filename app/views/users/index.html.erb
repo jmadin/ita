@@ -4,7 +4,7 @@
 
     <h1>Users</h1>
 
-    <% if current_user.admin? and !current_user?(user) %>
+    <% if current_user.admin? %>
       <p><%= link_to 'New User', new_user_path, class: "btn btn-sm btn-default" %></p>
     <% end %>
 
