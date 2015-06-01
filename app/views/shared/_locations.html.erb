@@ -1,0 +1,16 @@
+<h3>Locations</h3>
+
+<% if signed_in? and current_user.admin? %>
+  <p><%= link_to 'New Location', new_location_path, class: "btn btn-default" %></p>
+<% end %>
+
+<ul class="list-group">
+  <% @locations.each do |location| %>
+    <% if @maps and @maps.first.location == location %>
+      <%= link_to location.location_name, locations_path, class: "list-group-item active" %>
+    <% else %>
+      <%= link_to location.location_name, location, class: "list-group-item" %>
+    <% end %>
+  <% end %>
+</ul>
+

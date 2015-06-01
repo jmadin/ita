@@ -1,5 +1,7 @@
 class OutlinesController < ApplicationController
+  before_action :signed_in_user, only: [:index, :create, :show, :edit, :update, :destroy]
   before_action :set_outline, only: [:show, :edit, :update, :destroy]
+  before_action :admin_user,     only: [:edit, :update, :destroy]
 
   # GET /outlines
   # GET /outlines.json

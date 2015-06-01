@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  trip_name: MyString
+  start_date: 2015-05-23 18:23:47
+  end_date: 2015-05-23 18:23:47
+  trip_notes: MyText
+
+two:
+  trip_name: MyString
+  start_date: 2015-05-23 18:23:47
+  end_date: 2015-05-23 18:23:47
+  trip_notes: MyText

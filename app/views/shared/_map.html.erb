@@ -1,0 +1,78 @@
+<h3>
+  <%= @map.map_name %>
+</h3>
+
+<%= image_tag "record_thumb/#{@map.map_code}.tif.png", :style => "border:0px;", class:  "img-responsive" %>
+
+<p>
+  <strong>Download full-sized as:</strong>
+  <%= link_to "png", image_path("record_png/#{@map.map_code}.png") %> | <%= link_to "geotiff", image_path("record_geotiff/#{@map.map_code}.tif") %><br/>(Note that geotiffs retain lat and long information)
+</p>
+
+<% if params[:trip_id] %>
+  <p>
+    <strong>Location:</strong>
+    <% if @map.location %>
+      <%= link_to @map.location.location_name, location_map_path(:location_id => @map.location, :id => @map.id) %>
+    <% end %>
+  </p>
+<% end %>
+
+<% if params[:location_id] %>
+  <p>
+    <strong>Trip:</strong>
+    <% if @map.trip %>
+      <%= link_to @map.trip.trip_name, trip_map_path(:trip_id => @map.trip, :id => @map.id) %>
+    <% end %>
+  </p>
+<% end %>
+
+<p>
+  <strong>Map code:</strong>
+  <%= @map.map_code %>
+</p>
+
+<p>
+  <strong>Coordinates:</strong>
+  <%= @map.latitude %>, <%= @map.longitude %>
+</p>
+
+<p>
+  <strong>Geotiff pixel size (metres):</strong>
+  <%= @map.pixel_size %>
+</p>
+
+<p>
+  <strong>Map date:</strong>
+  <%= @map.map_date.to_s(:ita_date) %>
+</p>
+
+<p>
+  <a type="button" data-toggle="modal" data-target="#mapNotes" class="btn btn-warning btn-xs">Show map notes</a>
+</p>
+
+<div class="btn-group">
+  <% if signed_in? && current_user.admin? %>
+    <% if params[:trip_id] %>
+      <%= link_to 'Edit', edit_trip_map_path(:trip_id => @map.trip, :id => @map), class: "btn btn-default" %>
+    <% end %>
+    <% if params[:location_id] %>
+      <%= link_to 'Edit', edit_location_map_path(:location_id => @map.location, :id => @map), class: "btn btn-default" %>
+    <% end %>
+  <% end %>
+</div>
+
+<% if signed_in? && current_user.admin? %>
+  <%#= link_to 'X', map_path(@map), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-md btn-danger pull-right"  %>
+<% end %>
+
+<div class="modal fade" id="mapNotes" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <%= markdown @map.map_description %>
+      </div>
+    </div>
+  </div>
+</div>

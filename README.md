@@ -9,7 +9,31 @@ The project was built on Michael Hartl's sample_app_rails_4 from github, using t
     $ bundle install
     $ bundle exec rake db:migrate
 
+# Locations
+
+    $ rails generate scaffold Locations location_name:string location_code:string latitude:decimal longitude:decimal location_notes:text 
+    $ bundle exec rake db:migrate
+
+
+# Trips
+
+    $ rails generate scaffold Trips trip_name:string start_date:datetime end_date:datetime trip_notes:text 
+    $ bundle exec rake db:migrate
+
+    $ rails generate migration trips_users 
+    $ bundle exec rake db:migrate
+
+    $ rails generate migration add_stuff_to_user surname:string institution:string
+    $ bundle exec rake db:migrate
+
+
 # Maps
+
+    $ rails generate migration add_trip_to_map trip_id:references
+    $ bundle exec rake db:migrate
+
+    $ rails generate migration add_locationid_to_map location_id:references
+    $ bundle exec rake db:migrate
 
     $ rails generate scaffold Maps map_name:string map_description:text map_date:date user_id:references 
     $ bundle exec rake db:migrate
@@ -76,7 +100,7 @@ r20140430_horseshoe_circle02b, 0.000834102
     $ bundle exec rake db:migrate RAILS_ENV="production"
     $ rake tmp:clear
     $ bundle exec rake assets:precompile RAILS_ENV=production RAILS_GROUPS=assets
-    $ rails s -e production -p 3009
+    $ rails s -e production -p 3003
 
 delete from outlines;
 delete from sqlite_sequence where name='outlines';

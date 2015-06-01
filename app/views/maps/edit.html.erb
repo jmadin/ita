@@ -1,13 +1,30 @@
 <div class="row">
-  <div class="col-md-6 col-md-offset-3">
-		<h3>Editing map</h3>
+  <div class="col-sm-4">
+    <% if params[:trip_id] %>
+      <%= render "shared/trips" %>
+    <% end %>
 
-		<%= render 'form' %>
+    <% if params[:location_id] %>
+      <%= render "shared/locations" %>
+    <% end %>
+  </div>
+  <div class="col-sm-4">
+  
+    <% if params[:trip_id] %>
+      <%= render "shared/trip" %>
+    <% end %>
 
-		<br/>
-		<div class="btn-group">
-			<%= link_to 'Show', @map, class: "btn btn-default" %>
-			<%= link_to 'Back', maps_path, class: "btn btn-default" %>
-		</div>
+    <% if params[:location_id] %>
+      <%= render "shared/location" %>
+    <% end %>
+
+    <%= render "shared/maps" %>
+  </div>
+  <div class="col-sm-4">
+    <h3>Edit map</h3>
+
+    <%= render 'form' %>
+
   </div>
 </div>
+

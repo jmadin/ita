@@ -1,9 +1,25 @@
 <%= form_for(@map) do |f| %>
   <%= render 'shared/error_messages', object: f.object %>
 
+  <%= params[:location_id] %>
+
+  <% if params[:trip_id] %>
+    <%= hidden_field_tag :trip_back, params[:trip_id] %>
+  <% elsif params[:location_id] %>
+    <%= hidden_field_tag :location_back, params[:location_id] %>
+  <% end %>
+
   <div class="form-group">
     <%= f.label :map_name %><br>
     <%= f.text_field :map_name, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.select :location_id, Location.all.map { |u| [u.location_name, u.id] }, {:selected => params[:location_id]}, { class: "form-control" } %>
+  </div>
+
+  <div class="form-group">
+    <%= f.select :trip_id, Trip.all.map { |u| [u.trip_name, u.id] }, {:selected => params[:trip_id]}, { class: "form-control" } %>
   </div>
 
   <div class="form-group">

@@ -11,27 +11,42 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140623035717) do
+ActiveRecord::Schema.define(version: 20150523114104) do
 
-  create_table "maps", force: true do |t|
-    t.string   "map_name"
+  create_table "locations", force: :cascade do |t|
+    t.string   "location_name"
+    t.string   "location_code"
+    t.decimal  "latitude"
+    t.decimal  "longitude"
+    t.text     "location_notes"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  create_table "maps", force: :cascade do |t|
+    t.string   "map_name",        limit: 255
     t.text     "map_description"
     t.date     "map_date"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "map_code"
+    t.string   "map_code",        limit: 255
     t.decimal  "latitude"
     t.decimal  "longitude"
     t.decimal  "pixel_size"
+    t.integer  "trip_id"
+    t.integer  "location_id"
   end
 
-  create_table "outlines", force: true do |t|
+  add_index "maps", ["location_id"], name: "index_maps_on_location_id"
+  add_index "maps", ["trip_id"], name: "index_maps_on_trip_id"
+
+  create_table "outlines", force: :cascade do |t|
     t.integer  "map_id"
-    t.string   "substrate_type"
-    t.string   "substrate_state"
-    t.string   "outline_filename"
-    t.string   "outliner_name"
-    t.string   "outline_flag"
+    t.string   "substrate_type",    limit: 255
+    t.string   "substrate_state",   limit: 255
+    t.string   "outline_filename",  limit: 255
+    t.string   "outliner_name",     limit: 255
+    t.string   "outline_flag",      limit: 255
     t.decimal  "outline_area"
     t.decimal  "outline_perimeter"
     t.text     "outline_notes"
@@ -43,14 +58,30 @@ ActiveRecord::Schema.define(version: 20140623035717) do
   add_index "outlines", ["map_id"], name: "index_outlines_on_map_id"
   add_index "outlines", ["user_id"], name: "index_outlines_on_user_id"
 
-  create_table "users", force: true do |t|
-    t.string   "name"
-    t.string   "email"
+  create_table "trips", force: :cascade do |t|
+    t.string   "trip_name"
+    t.datetime "start_date"
+    t.datetime "end_date"
+    t.text     "trip_notes"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "trips_users", id: false, force: :cascade do |t|
+    t.integer "trip_id"
+    t.integer "user_id"
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string   "name",            limit: 255
+    t.string   "email",           limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "password_digest"
-    t.string   "remember_token"
+    t.string   "password_digest", limit: 255
+    t.string   "remember_token",  limit: 255
     t.boolean  "admin"
+    t.string   "surname"
+    t.string   "institution"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

@@ -17,10 +17,17 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
+    
     if @user.save
-      sign_in @user
+      if not current_user.admin?
+        sign_in @user
+      end
       flash[:success] = "Welcome to Ita"
-      redirect_to @user
+      if current_user.admin?
+        redirect_to users_path
+      else
+        redirect_to @user
+      end
     else
       render 'new'
     end
@@ -48,7 +55,7 @@ class UsersController < ApplicationController
   private
 
     def user_params
-      params.require(:user).permit(:name, :email, :password, :password_confirmation)
+      params.require(:user).permit(:name, :surname, :institution, :email, :password, :password_confirmation)
     end
 
     # Before filters

@@ -19,3 +19,6 @@
 //= require jquery.turbolinks
 //= require_tree .
 
+$(document).ready(function(){
+    $('span').tooltip();
+});

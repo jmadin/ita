@@ -1,0 +1,48 @@
+<%= form_for(@trip) do |f| %>
+
+  
+  <div class="row">
+    <div class="col-sm-4">
+
+      <%= render 'shared/error_messages', object: @trip %>
+
+      <div class="form-group">
+        <%= f.label :trip_name %><br>
+        <%= f.text_field :trip_name, class: "form-control" %>
+      </div>
+      <div class="form-group">
+        <%= f.label :start_date %><br>
+        <%= f.date_select :start_date, class: "form-control" %>
+      </div>
+      <div class="form-group">
+        <%= f.label :end_date %><br>
+        <%= f.date_select :end_date, class: "form-control" %>
+      </div>
+    </div>
+    <div class="col-sm-4">
+
+      <div id="users">
+        <%= f.fields_for :users do |t| %>
+          <%= render "user_fields", :f => t %>
+        <% end %>
+      </div>
+
+      <div class="links">
+        <p><%= link_to_add_association "Add person", f, :users %></p>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-8">
+
+      <div class="form-group">
+        <%= f.label :trip_notes %> (markdown okay)<br>
+        <%= f.text_area :trip_notes, rows: 20, class: "form-control" %>
+      </div>
+      <div class="actions">
+        <%= f.submit "Submit", class: "btn btn-default" %>
+      </div>
+    </div>
+  </div>
+
+<% end %>

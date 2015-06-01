@@ -10,6 +10,7 @@ gem 'cocoon'#, github: 'nathanvda/cocoon'
 gem 'will_paginate'#, '3.0.4'
 gem 'bootstrap-will_paginate'#, '0.0.9'
 gem 'sqlite3'#, '1.3.8'
+gem 'redcarpet'
 
 group :development, :test do
 end

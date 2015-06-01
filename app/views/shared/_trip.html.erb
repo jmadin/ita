@@ -1,0 +1,30 @@
+<h3>
+  <%= @trip.trip_name %>
+</h3>
+
+<p>
+  <% @trip.users.each do |user| %>
+    <%= link_to "#{user.name} #{user.surname}", user %><% if user != @trip.users.last %>,<% end %>
+  <% end %>
+</p>
+
+<p>
+  <a type="button" data-toggle="modal" data-target="#tripNotes" class="btn btn-warning btn-xs">Show trip notes</a>
+</p>
+
+<% if signed_in? and current_user.admin? %>
+  <div class="btn-group">
+    <%= link_to 'Edit', edit_trip_path(@trip), class: "btn btn-default" %>
+  </div>
+<% end %>
+
+<div class="modal fade" id="tripNotes" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <%= markdown @trip.trip_notes %>
+      </div>
+    </div>
+  </div>
+</div>

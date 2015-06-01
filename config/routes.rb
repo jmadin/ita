@@ -1,5 +1,13 @@
 Ita::Application.routes.draw do
 
+  resources :locations do
+    resources :maps
+  end
+
+  resources :trips do
+    resources :maps
+  end
+
   resources :outlines
 
   resources :maps
@@ -7,6 +15,11 @@ Ita::Application.routes.draw do
   resources :maps do
     resources :outlines
   end
+
+  # resources :maps do
+  #   resources :trips
+  #   resources :locations
+  # end
 
   resources :users 
   

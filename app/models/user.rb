@@ -1,6 +1,8 @@
 class User < ActiveRecord::Base
 
   has_many :outlines
+  has_and_belongs_to_many :trips, :dependent => :destroy
+  accepts_nested_attributes_for :trips, :reject_if => :all_blank, :allow_destroy => true
 
   before_save { self.email = email.downcase }
   before_create :create_remember_token
@@ -10,6 +12,8 @@ class User < ActiveRecord::Base
                     uniqueness: { case_sensitive: false }
   has_secure_password
   validates :password, length: { minimum: 6 }
+
+  default_scope -> { order('surname ASC') }
 
   def User.new_remember_token
     SecureRandom.urlsafe_base64

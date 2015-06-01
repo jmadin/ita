@@ -1,16 +1,35 @@
-<% provide(:title, @user.name) %>
-
 <div class="row">
-  <div class="col-md-6 col-md-offset-3">
+  <div class="col-sm-4">
+    <% provide(:title, @user.name) %>
 
-    <div class="span3">
-      <section>
-        <h3>
-          <%= gravatar_for @user %>
-          <%= @user.name %>
-        </h3>
-        <%= @user.email %>
-      </section>
-    </div>
+    <h1>
+      <%= @user.name %> <%= @user.surname %>
+    </h1>
+
+    <p>
+      <%= @user.institution %>
+    </p>
+
+    <p>
+      <%= mail_to @user.email %>
+    </p>
+
+    <h3>Trips</h3>
+
+    <ul class="list-group">
+      <% @user.trips.each do |trip| %>
+        <li class="list-group-item">             
+          <div class="row">
+            <div class="col-sm-6">
+              <%= link_to trip.trip_name, trip %>
+            </div>
+            <div class="col-sm-6">
+              <%= trip.start_date.to_s(:ita_date) %> to <%= trip.end_date.to_s(:ita_date) %>
+            </div>
+          </div>
+        </li>
+      <% end %>
+    </ul>
+
   </div>
 </div>

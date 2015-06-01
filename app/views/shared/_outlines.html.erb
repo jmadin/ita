@@ -1,0 +1,26 @@
+<h2>Outlines</h2>
+
+<div class="row">
+  <div class="col-md-1"><h4>ID</h4></div>
+  <div class="col-md-2"><h4>Type</h4></div>
+  <div class="col-md-2"><h4>State</h4></div>
+  <div class="col-md-2"><h4>Filename</h4></div>
+  <div class="col-md-2"><h4>Notes</h4></div>
+  <div class="col-md-3"></div>
+</div>
+
+<%= render @map.outlines %>
+
+<div class="row">
+  <%= form_for([@map, @map.outlines.build]) do |f| %>
+    <div class="col-md-1"></div>
+    <div class="col-md-2"><%= f.select :substrate_type, ["", "Hard coral", "Soft coral", "Filamentous algae", "Macroalgae", "Hard substrate", "Large rubble", "Small rubble", "Sand"], {}, { class: "form-control" } %></div>
+    <div class="col-md-2"><%= f.select :substrate_state, ["", "Attached", "Dislodged", "Break", "Scoured", "Damage other"], {}, { class: "form-control" } %></div>
+    <div class="col-md-2"><%= f.text_field :outline_filename, class: "form-control" %></div>
+
+    <%= f.hidden_field :user_id, :value => current_user.id %>
+
+    <div class="col-md-2"><%= f.text_area :outline_notes, class: "form-control" %></div>
+    <div class="col-md-3"><%= f.submit class: "btn btn-primary" %></div>
+  <% end %>
+</div>

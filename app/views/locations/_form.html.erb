@@ -1,0 +1,38 @@
+<%= form_for(@location) do |f| %>
+
+  <div class="row">
+    <div class="col-sm-4">
+
+      <%= render 'shared/error_messages', object: @location %>
+
+      <div class="form-group">
+        <%= f.label :location_name %><br>
+        <%= f.text_field :location_name, class: "form-control" %>
+      </div>
+      <div class="form-group">
+        <%= f.label :location_code %><br>
+        <%= f.text_field :location_code, class: "form-control" %>
+      </div>
+      <div class="form-group">
+        <%= f.label :latitude %><br>
+        <%= f.text_field :latitude, class: "form-control" %>
+      </div>
+      <div class="form-group">
+        <%= f.label :longitude %><br>
+        <%= f.text_field :longitude, class: "form-control" %>
+      </div>
+
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-8">
+      <div class="form-group">
+        <%= f.label :location_notes %> (markdown okay)<br>
+        <%= f.text_area :location_notes, rows: 20, class: "form-control" %>
+      </div>
+      <div class="actions">
+        <%= f.submit "Submit", class: "btn btn-default" %>
+      </div>
+    </div>
+  </div>
+<% end %>

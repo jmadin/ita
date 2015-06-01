@@ -1,0 +1,61 @@
+<h3>
+  <%= @location.location_name %>
+</h3>
+
+<div id="map-canvas" class="map-container" data-no-turbolink></div>
+
+<p>
+  <strong>Location code:</strong>
+  <%= @location.location_code %>
+</p>
+
+<p>
+  <strong>Latitude:</strong>
+  <%= @location.latitude %>
+</p>
+
+<p>
+  <strong>Longitude:</strong>
+  <%= @location.longitude %>
+</p>
+
+<p>
+  <a type="button" data-toggle="modal" data-target="#locationNotes" class="btn btn-warning btn-xs">Show location notes</a>
+</p>
+
+<% if signed_in? and current_user.admin? %>
+  <div class="btn-group">
+    <%= link_to 'Edit', edit_location_path(@location), class: "btn btn-default" %>
+  </div>
+<% end %>
+
+<div class="modal fade" id="locationNotes" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <%= markdown @location.location_notes %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+  var loc = <%= raw [@location.location_name.to_s, @location.latitude.to_s, @location.longitude.to_s, @location.id.to_s] %>;
+
+  var map = new google.maps.Map(document.getElementById('map-canvas'), {
+    zoom: 16,
+    center: new google.maps.LatLng(loc[1], loc[2]),
+    mapTypeId: google.maps.MapTypeId.SATELLITE,
+    streetViewControl: false
+  });
+
+  var infowindow = new google.maps.InfoWindow();
+
+  marker = new google.maps.Marker({
+    position: new google.maps.LatLng(loc[1], loc[2]),
+    map: map
+  });
+</script>
+
+

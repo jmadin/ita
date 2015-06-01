@@ -1,0 +1,33 @@
+<h3>Trips</h3>
+
+<% if signed_in? and current_user.admin? %>
+  <p><%= link_to 'New Trip', new_trip_path, class: "btn btn-default" %></p>
+<% end %>
+
+<ul class="list-group">
+  <% @trips.each do |trip| %>
+    <% if @maps and @maps.first.trip == trip %>
+      <%= link_to trips_path, class: "list-group-item active" do %>
+        <div class="row">
+          <div class="col-sm-6">
+            <%= trip.trip_name %>
+          </div>
+          <div class="col-sm-6">
+            <%= trip.start_date.to_s(:ita_date) %> to <%= trip.end_date.to_s(:ita_date) %>
+          </div>
+        </div>
+      <% end %>
+    <% else %>
+      <%= link_to trip, class: "list-group-item" do %>
+        <div class="row">
+          <div class="col-sm-6">
+            <%= trip.trip_name %>
+          </div>
+          <div class="col-sm-6">
+            <%= trip.start_date.to_s(:ita_date) %> to <%= trip.end_date.to_s(:ita_date) %>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+  <% end %>
+</ul>
