@@ -54,10 +54,10 @@
 <div class="btn-group">
   <% if signed_in? && current_user.admin? %>
     <% if params[:trip_id] %>
-      <%= link_to 'Edit', edit_trip_map_path(:trip_id => @map.trip, :id => @map), class: "btn btn-default" %>
+      <%= link_to 'Edit', edit_trip_map_path(:trip_id => @map.trip, :id => @map), class: "btn btn-sm btn-default" %>
     <% end %>
     <% if params[:location_id] %>
-      <%= link_to 'Edit', edit_location_map_path(:location_id => @map.location, :id => @map), class: "btn btn-default" %>
+      <%= link_to 'Edit', edit_location_map_path(:location_id => @map.location, :id => @map), class: "btn btn-sm btn-default" %>
     <% end %>
   <% end %>
 </div>

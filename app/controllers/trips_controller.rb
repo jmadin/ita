@@ -1,6 +1,6 @@
 class TripsController < ApplicationController
-  before_action :signed_in_user, only: [:index, :show]
   before_action :set_trip, only: [:show, :edit, :update, :destroy]
+  before_action :signed_in_user, only: [:index, :show]
   before_action :admin_user,     only: [:new, :create, :edit, :update, :destroy]
 
   # GET /trips

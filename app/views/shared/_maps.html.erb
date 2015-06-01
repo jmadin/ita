@@ -2,11 +2,11 @@
 
 <% if signed_in? and current_user.admin? %>
   <% if params[:controller] == "locations" or params[:location_id] %>
-    <p><%= link_to 'New Map', new_location_map_path(:location_id => @location.id), class: "btn btn-default" %></p>
+    <p><%= link_to 'New Map', new_location_map_path(:location_id => @location.id), class: "btn btn-sm btn-default" %></p>
   <% elsif params[:controller] == "trips" or params[:trip_id] %>
-    <p><%= link_to 'New Map', new_trip_map_path(:trip_id => @trip.id), class: "btn btn-default" %></p>
+    <p><%= link_to 'New Map', new_trip_map_path(:trip_id => @trip.id), class: "btn btn-sm btn-default" %></p>
   <% else %>
-    <p><%= link_to 'New Map', new_map_path, class: "btn btn-default" %></p>
+    <p><%= link_to 'New Map', new_map_path, class: "btn btn-sm btn-default" %></p>
   <% end %>
 <% end %>
 
