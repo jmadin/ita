@@ -2,7 +2,7 @@
   <div class="col-sm-8">
     <% provide(:title, 'All users') %>
 
-    <h1>Users</h1>
+    <h3>People</h3>
 
     <% if current_user.admin? %>
       <p><%= link_to 'New User', new_user_path, class: "btn btn-sm btn-default" %></p>
@@ -33,9 +33,9 @@
                   <%= link_to 'Edit', edit_user_path(user), class: "btn btn-xs btn-default" %>
                 <% end %>
                 <% if current_user.admin? and !current_user?(user) %>
-                  <%= link_to 'Delete', user, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-xs btn-danger" %>
+                  <%= link_to 'Delete', user, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-xs btn-warning" %>
                 <% elsif current_user.admin? %>
-                  <%= link_to 'Delete', user, class: "btn btn-xs btn-danger inactive", disabled: "disabled" %>
+                  <%= link_to 'Delete', user, class: "btn btn-xs btn-warning inactive", disabled: "disabled" %>
                 <% end %>
 
               </div>

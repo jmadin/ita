@@ -1,13 +1,15 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
+body { padding-top: 65px; }
+
 /* links */
 a {
   color: #666;
 }
 
 #error_explanation {
-  color: #f00;
+  color: orange;
   ul {
     list-style: none;
     margin: 0 0 18px 0;

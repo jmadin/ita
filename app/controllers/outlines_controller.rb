@@ -41,7 +41,7 @@ class OutlinesController < ApplicationController
       flash[:success] = "Outline was successfully created."
     else
       redirect_to map_path(@map)
-      flash[:danger] = "Outline was not successfully created. Type and State required."
+      flash[:warning] = "Outline was not successfully created. Type and State required."
     end
   end
 
@@ -53,7 +53,7 @@ class OutlinesController < ApplicationController
       flash[:success] = "Outline was successfully updated."
     else
       redirect_to map_path(@outline.map_id)
-      flash[:danger] = "Outline was not successfully updated. Type and State required."
+      flash[:warning] = "Outline was not successfully updated. Type and State required."
     end
   end
 

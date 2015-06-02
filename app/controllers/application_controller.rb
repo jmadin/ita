@@ -15,7 +15,7 @@ class ApplicationController < ActionController::Base
 
   def admin_user
     if not current_user.admin?
-      flash[:danger] = "Not allowed."
+      flash[:warning] = "Not allowed."
       redirect_to(root_url)
     end 
   end

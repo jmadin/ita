@@ -14,13 +14,13 @@
   <% @maps.each do |map| %>
     <% if params[:controller] == "maps" and params[:trip_id] %>
       <% if params[:action] == "show" and @map == map %>
-        <%= link_to map.map_name, trip_path(:id => params[:trip_id]), class: "list-group-item active" %>
+        <%= link_to map.map_name, trip_path(:id => params[:trip_id]), class: "list-group-item list-group-item-warning" %>
       <% else %>
         <%= link_to map.map_name, trip_map_path(:trip_id => params[:trip_id], :id => map.id), class: "list-group-item" %>
       <% end %>
     <% elsif params[:controller] == "maps" and params[:location_id] %>
       <% if @map == map %>
-        <%= link_to map.map_name, location_path(:id => params[:location_id]), class: "list-group-item active" %>
+        <%= link_to map.map_name, location_path(:id => params[:location_id]), class: "list-group-item list-group-item-warning" %>
       <% else %>
         <%= link_to map.map_name, location_map_path(:location_id => params[:location_id], :id => map.id), class: "list-group-item" %>
       <% end %>
@@ -28,7 +28,7 @@
 
     <% if params[:controller] == "trips" %>
       <% if params[:action] == "show" and @map == map %>
-        <%= link_to map.map_name, maps_path, class: "list-group-item active" %>
+        <%= link_to map.map_name, maps_path, class: "list-group-item list-group-item-warning" %>
       <% else %>
         <%= link_to map.map_name, trip_map_path(:trip_id => @trip, :id => map.id), class: "list-group-item" %>
       <% end %>
@@ -36,7 +36,7 @@
 
     <% if params[:controller] == "locations" %>
       <% if params[:action] == "show" and @map == map %>
-        <%= link_to map.map_name, maps_path, class: "list-group-item active" %>
+        <%= link_to map.map_name, maps_path, class: "list-group-item list-group-item-warning" %>
       <% else %>
         <%= link_to map.map_name, location_map_path(:location_id => @location, :id => map.id), class: "list-group-item" %>
       <% end %>

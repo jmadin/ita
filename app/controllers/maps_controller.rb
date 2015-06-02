@@ -88,7 +88,7 @@ puts "HERE=================================="
         redirect_to maps_path
       end
     else
-      flash[:danger] = @map.errors.full_messages.join(', ')
+      flash[:warning] = @map.errors.full_messages.join(', ')
       if params[:trip_back]
         redirect_to new_trip_map_path(:trip_id => params[:trip_back])
       elsif params[:location_back]
@@ -124,7 +124,7 @@ puts "HERE=================================="
   # DELETE /maps/1.json
   def destroy
     @map.destroy
-    flash[:danger] = "Map destroyed."
+    flash[:warning] = "Map destroyed."
     # if params[:trip_back]
     #   redirect_to trip_map_path(:trip_id => @map.trip_id, :id => @map)
     # elsif params[:location_back]
