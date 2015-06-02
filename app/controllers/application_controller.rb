@@ -6,6 +6,8 @@ class ApplicationController < ActionController::Base
 
   WillPaginate.per_page = 8
   
+  before_filter :set_last_seen_at, if: proc { |p| signed_in? && (session[:last_seen_at] == nil || session[:last_seen_at] < 15.minutes.ago) }
+
   def correct_user
     @user = User.find(params[:id])
     redirect_to(root_url) unless current_user?(@user)
@@ -17,5 +19,12 @@ class ApplicationController < ActionController::Base
       redirect_to(root_url)
     end 
   end
+
+  private
+
+    def set_last_seen_at
+      current_user.update_attribute(:last_seen_at, Time.now)
+      session[:last_seen_at] = Time.now
+    end
  
 end
