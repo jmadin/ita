@@ -24,4 +24,7 @@ Ita::Application.configure do
 
   # Debug mode disables concatenation and preprocessing of assets.
   config.assets.debug = true
+
+  config.assets.precompile += %w( '.woff', '.eot', '.svg', '.ttf' )
+
 end
