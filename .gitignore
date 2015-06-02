@@ -11,7 +11,7 @@
 /public/assets
 
 # Ignore other unneeded files.
-/app/assets/images
+/app/assets/images/record_thumb
 database.yml
 doc/
 *.swp
